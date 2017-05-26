@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Airplane</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="full-screen" content="yes"/>
+<meta name="screen-orientation" content="portrait"/>
+<meta name="x5-fullscreen" content="true"/>
+<meta name="360-fullscreen" content="true"/>
+</head>
+<style>
+html, body, p, div {margin:0;padding:0;}
+body {background-color: #000;font-size:4vmin;}
+html, body {height: 100%}
+.bar {margin:0 auto;margin-top:250px;height:4px;width:80%;border-radius:2px;overflow:hidden;background:#666;}
+.bar i {display:block;width:0;height:4px;background-color:#999;}
+p {margin-top:5px;text-align:center;color:#ddd;}
+</style>
+<body>
+<div class="bar">
+    <i id="progress"></i>
+</div>
+<p id="percent">Loading..</p>
+<script src='http://tinyjs.net/libs/tiny.full.debug.js'></script>
+<script src='src/Util.js'></script>
+<script src='src/Resource.js'></script>
+<script src='src/Sound.js'></script>
+<script src='src/Score.js'></script>
+<script src='src/Button.js'></script>
+<script src='src/PauseButton.js'></script>
+<script src='src/Background.js'></script>
+<script src='src/Hero.js'></script>
+<script src='src/Enemy.js'></script>
+<script src='src/Pickup.js'></script>
+<script src='src/Bomb.js'></script>
+<script src='src/GameOver.js'></script>
+<script src='src/MainLayer.js'></script>
+<script src='src/StartLayer.js'></script>
+<script src='main.js'></script>
+<script>
+    function bridgeReady(){
+        AlipayJSBridge.call("hideTitlebar");
+    }
+
+    window.AlipayJSBridge ? bridgeReady() : document.addEventListener('AlipayJSBridgeReady', function () {
+        bridgeReady();
+    });
+</script>
+</body>
+</html>
