@@ -6,12 +6,12 @@ function Sound() {
 Sound._musics = [];
 
 Sound.playSfx = function (sfx) {
-  var audio = Tiny.audioManager.getAudio(sfx);
+  var audio = Tiny.audio.manager.getAudio(sfx);
   audio.play();
 };
 
 Sound.playMusic = function (m) {
-  var music = Tiny.audioManager.getAudio(m);
+  var music = Tiny.audio.manager.getAudio(m);
   ;
   music.loop = true;
   music.play();
