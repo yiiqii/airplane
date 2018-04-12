@@ -3,7 +3,7 @@
 var Pickup = function (type) {
   this.type = type;
 
-  Tiny.Sprite.call(this, Tiny.Texture.fromImage(RESOURCES['s_ufo' + type + '_png']));
+  Tiny.Sprite.call(this, Tiny.Texture.fromImage(RESOURCES[ 's_ufo' + type + '_png' ]));
 
   this.speed = 6;
   this.ratio = 0;
@@ -36,7 +36,7 @@ Pickup.prototype.gainCalculate = function (hero) {
     case 2:
       Sound.playGetDoubleSound();
       hero.power = true;
-      hero.powerClock = new Date().getTime();
+      hero.powerClock = Tiny.getTime();
       break;
   }
 };
@@ -59,7 +59,7 @@ PickupManager.prototype.update = function () {
   this.add();
 
   for (var i = 0; i < this._pickups.length; i++) {
-    var pickup = this._pickups[i];
+    var pickup = this._pickups[ i ];
     pickup.update();
 
     if (pickup.isPickedUp) {
@@ -91,7 +91,7 @@ PickupManager.prototype.add = function () {
 
 PickupManager.prototype.destroyAll = function () {
   for (var i = 0; i < this._pickups.length; i++) {
-    var pickup = this._pickups[i];
+    var pickup = this._pickups[ i ];
     this._parent._container.removeChild(pickup);
   }
 

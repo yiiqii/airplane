@@ -3,8 +3,8 @@
 var Background = function () {
   Tiny.Container.call(this);
 
-  this.bg = new Background.createSprite(Tiny.Texture.fromImage(RESOURCES['s_background_png']), this);
-  this.preTime = new Date().getTime();
+  this.bg = new Background.createSprite(Tiny.Texture.fromImage(RESOURCES[ 's_background_png' ]), this);
+  this.preTime = Tiny.getTime();
 
   this.scrollTime = 0;
 
@@ -19,7 +19,7 @@ Background.prototype.update = function () {
   this.scrollTime += 0.5;
   if (this.scrollTime > Tiny.WIN_SIZE.height) this.scrollTime = 0;
 
-  this.scrollPosition = (new Date().getTime() - this.preTime) / 10 + 4000;
+  this.scrollPosition = (Tiny.getTime() - this.preTime) / 10 + 4000;
 
   this.bg.setPosition(this.scrollPosition);
 };
@@ -44,6 +44,6 @@ Background.createSprite.prototype.setPosition = function (position) {
     pos %= h * this.sprites.length;
     pos += h * 2;
 
-    this.sprites[i].setPositionY(-Math.floor(pos));
+    this.sprites[ i ].setPositionY(-Math.floor(pos));
   }
 };

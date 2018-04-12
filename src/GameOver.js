@@ -16,7 +16,7 @@ var GameOver = function () {
   this.createButton('重新游戏');
 
 
-  var moveUpAction = Tiny.MoveTo(1000, {y: Tiny.WIN_SIZE.height / 2});
+  var moveUpAction = Tiny.MoveTo(1000, { y: Tiny.WIN_SIZE.height / 2 });
   var fadeInAction = Tiny.FadeIn(600);
   moveUpAction.setEasing(Tiny.TWEEN.Easing.Quintic.Out);
   this.container.runAction(moveUpAction, fadeInAction);
@@ -63,7 +63,7 @@ GameOver.prototype.createScore = function () {
 GameOver.prototype.createHero = function () {
   var textures = [];
   for (var i = 1; i <= 2; i++) {
-    textures.push(Tiny.Texture.fromImage(RESOURCES['s_hero' + i + '_png']));
+    textures.push(Tiny.Texture.fromImage(RESOURCES[ 's_hero' + i + '_png' ]));
   }
   var hero = new Tiny.AnimatedSprite(textures);
   hero.animationSpeed = 0.12;

@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 var Bomb = function (parent) {
-  Tiny.Sprite.call(this, Tiny.Texture.fromImage(RESOURCES['s_bomb_png']));
+  Tiny.Sprite.call(this, Tiny.Texture.fromImage(RESOURCES[ 's_bomb_png' ]));
 
   this._parent = parent;
   this.num = 0;
@@ -40,7 +40,7 @@ Bomb.prototype.use = function () {
   Sound.playUseBombSound();
   var enemies = this._parent._enemyManager._enemies;
   for (var i = enemies.length; i--;) {
-    enemies[i].die();
+    enemies[ i ].die();
   }
 };
 

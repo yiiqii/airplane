@@ -12,27 +12,27 @@ var Enemy = function (type) {
   this.score = 1;
 
   if (type != 3) {
-    textures.push(Tiny.Texture.fromImage(RESOURCES['s_enemy' + type + '_png']));
+    textures.push(Tiny.Texture.fromImage(RESOURCES[ 's_enemy' + type + '_png' ]));
 
     if (type == 2) {
       this.hp = 8;
       this.damageHp = 3;
       this.score = 8;
-      this.damageTextures.push(Tiny.Texture.fromImage(RESOURCES['s_enemy' + type + '_hit_png']));
-      this.damageTextures.push(Tiny.Texture.fromImage(RESOURCES['s_enemy' + type + '_png']));
+      this.damageTextures.push(Tiny.Texture.fromImage(RESOURCES[ 's_enemy' + type + '_hit_png' ]));
+      this.damageTextures.push(Tiny.Texture.fromImage(RESOURCES[ 's_enemy' + type + '_png' ]));
     }
   } else {
     this.hp = 18;
     this.damageHp = 6;
     this.score = 18;
     for (var i = 1; i <= 2; i++) {
-      textures.push(Tiny.Texture.fromImage(RESOURCES['s_enemy' + type + '_n' + i + '_png']));
+      textures.push(Tiny.Texture.fromImage(RESOURCES[ 's_enemy' + type + '_n' + i + '_png' ]));
     }
-    this.damageTextures.push(Tiny.Texture.fromImage(RESOURCES['s_enemy' + type + '_hit_png']));
-    this.damageTextures.push(Tiny.Texture.fromImage(RESOURCES['s_enemy' + type + '_n2_png']));
+    this.damageTextures.push(Tiny.Texture.fromImage(RESOURCES[ 's_enemy' + type + '_hit_png' ]));
+    this.damageTextures.push(Tiny.Texture.fromImage(RESOURCES[ 's_enemy' + type + '_n2_png' ]));
   }
   for (var i = 1; i <= (type == 3 ? 6 : 4); i++) {
-    this.dieTextures.push(Tiny.Texture.fromImage(RESOURCES['s_enemy' + type + '_down' + i + '_png']));
+    this.dieTextures.push(Tiny.Texture.fromImage(RESOURCES[ 's_enemy' + type + '_down' + i + '_png' ]));
   }
 
   Tiny.AnimatedSprite.call(this, textures);
@@ -90,7 +90,7 @@ Enemy.prototype.collision = function () {
   heroBounds.y += 5;
   heroBounds.height -= 5;
   heroBounds.width -= 5;
-  if (Tiny.rectIntersectsRect(heroBounds, this.getBounds())) {
+  if (Tiny.rectIntersectsRect(heroBounds, this.getBounds()) && !hero.isDead) {
     this.die();
     hero.die();
   }
@@ -110,7 +110,7 @@ EnemyManager.prototype.update = function () {
   this.add();
 
   for (var i = this._enemies.length; i--;) {
-    var enemy = this._enemies[i];
+    var enemy = this._enemies[ i ];
     enemy.update();
     if (enemy.isDead) {
       this._parent._score._goal += enemy.score;
@@ -156,7 +156,7 @@ EnemyManager.prototype.add = function () {
 
 EnemyManager.prototype.destroyAll = function () {
   for (var i = 0; i < this._enemies.length; i++) {
-    var enemy = this._enemies[i];
+    var enemy = this._enemies[ i ];
     this._parent._container.removeChild(enemy);
   }
 

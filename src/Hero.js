@@ -5,17 +5,17 @@
  * @constructor
  */
 var Hero = function () {
-  this.textures = [];
+  var textures = [];
   this.dieTextures = [];
   for (var i = 1; i <= 2; i++) {
-    this.textures.push(Tiny.Texture.fromImage(RESOURCES['s_hero' + i + '_png']));
+    textures.push(Tiny.Texture.fromImage(RESOURCES[ 's_hero' + i + '_png' ]));
   }
 
   for (var i = 1; i <= 4; i++) {
-    this.dieTextures.push(Tiny.Texture.fromImage(RESOURCES['s_hero_blowup_n' + i + '_png']));
+    this.dieTextures.push(Tiny.Texture.fromImage(RESOURCES[ 's_hero_blowup_n' + i + '_png' ]));
   }
 
-  Tiny.AnimatedSprite.call(this, this.textures);
+  Tiny.AnimatedSprite.call(this, textures);
 
   //帧帧动画速度
   this.animationSpeed = 0.12;
@@ -32,6 +32,11 @@ var Hero = function () {
   this.play();
   this.setEventEnabled(true);
   this.bindDrag();
+
+  // var self = this;
+  // setTimeout(function () {
+  //   self.die();
+  // }, 10000);
 };
 
 Hero.prototype = Object.create(Tiny.AnimatedSprite.prototype);
@@ -41,14 +46,15 @@ Hero.prototype.die = function () {
   this.isDead = true;
   this.textures = this.dieTextures;
   this.loop = false;
+  this.gotoAndPlay(0);
   this.onComplete = function () {
     this.parent.gameOver();
   };
 };
 
 Hero.prototype.bindDrag = function () {
-  var heroHalfWidth = this.width / 2,
-    heroHalfHeight = this.height / 2;
+  var heroHalfWidth = this.width / 2;
+  var heroHalfHeight = this.height / 2;
   this.mousedown = this.touchstart = function (data) {
     data.stopPropagation();
     this.data = data;
@@ -85,7 +91,7 @@ Hero.prototype.createCartridge = function (x, y) {
 
   if (this.power) {
     for (var i = 0; i < 2; i++) {
-      var c = Tiny.Sprite.fromImage(RESOURCES['s_bullet2_png']);
+      var c = Tiny.Sprite.fromImage(RESOURCES[ 's_bullet2_png' ]);
       var w = this.width / 4 + 6;
       i % 2 == 0 ? x += w : x -= 2 * w;
       c.setPosition(x, y + 20);
@@ -95,7 +101,7 @@ Hero.prototype.createCartridge = function (x, y) {
     }
     Sound.playDoubleBulletSound();
   } else {
-    var c = Tiny.Sprite.fromImage(RESOURCES['s_bullet1_png']);
+    var c = Tiny.Sprite.fromImage(RESOURCES[ 's_bullet1_png' ]);
     c.setPosition(x, y - 20);
     this.cartridges.push(c);
     this.parent._container.addChild(c);
@@ -104,26 +110,27 @@ Hero.prototype.createCartridge = function (x, y) {
 };
 
 Hero.prototype.attacking = function (parent) {
-  if (new Date().getTime() - this.powerClock >= 15000) {
+  var self = this;
+  if (Tiny.getTime() - this.powerClock >= 15000) {
     this.power = false;
   }
   this.createCartridge(this.x - 3, this.y - this.height / 2);
 
   var speed = 10;
   for (var i = this.cartridges.length; i--;) {
-    var c = this.cartridges[i];
+    var c = this.cartridges[ i ];
 
     if (c.getPositionY() <= 0) {
-      this.cartridges.splice(i, 1);
       parent._container.removeChild(c);
+      this.cartridges.splice(i, 1);
       continue;
     }
 
     for (var j = parent._enemyManager._enemies.length; j--;) {
-      var enemy = parent._enemyManager._enemies[j];
+      var enemy = parent._enemyManager._enemies[ j ];
       if (i != this.cartridges.length - 1 && enemy.hp != 0 && Tiny.rectIntersectsRect(c.getBounds(), enemy.getBounds())) {
-        this.cartridges.splice(i, 1);
         parent._container.removeChild(c);
+        this.cartridges.splice(i, 1);
 
         enemy.beAttacked();
       }
@@ -131,5 +138,14 @@ Hero.prototype.attacking = function (parent) {
 
     c.position.y -= speed;
   }
+  // 清理子弹
+  parent._container.children.forEach(function (c) {
+    if (!(c instanceof Enemy)) {
+      if (self.cartridges.indexOf(c) === -1) {
+        console.log(c);
+        parent._container.removeChild(c);
+      }
+    }
+  });
 };
 

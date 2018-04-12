@@ -22,13 +22,13 @@ MainLayer.prototype.init = function () {
 };
 
 MainLayer.prototype.createBackground = function () {
-  var bg = Tiny.Sprite.fromImage(RESOURCES['s_background_png']);
+  var bg = Tiny.Sprite.fromImage(RESOURCES[ 's_background_png' ]);
   bg.setAnchor(0.5);
   this.container.addChild(bg);
 };
 
 MainLayer.prototype.createLogo = function () {
-  var logo = Tiny.Sprite.fromImage(RESOURCES['s_shoot_copyright_png']);
+  var logo = Tiny.Sprite.fromImage(RESOURCES[ 's_shoot_copyright_png' ]);
   logo.setAnchor(0.5);
   logo.setPositionY(-200);
 
@@ -38,7 +38,7 @@ MainLayer.prototype.createLogo = function () {
 MainLayer.prototype.createHero = function () {
   var textures = [];
   for (var i = 1; i <= 3; i++) {
-    textures.push(Tiny.Texture.fromImage(RESOURCES['s_game_loading' + i + '_png']));
+    textures.push(Tiny.Texture.fromImage(RESOURCES[ 's_game_loading' + i + '_png' ]));
   }
   this._hero = new Tiny.AnimatedSprite(textures);
   this._hero.animationSpeed = 0.06;

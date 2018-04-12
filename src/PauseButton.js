@@ -1,10 +1,10 @@
 /* eslint-disable */
 
 var PauseButton = function () {
-  this.pauseTexture = Tiny.Texture.fromImage(RESOURCES['s_game_pause_nor_png']);
-  this.pressPauseTexture = Tiny.Texture.fromImage(RESOURCES['s_game_pause_pressed_png']);
-  this.resumeTexture = Tiny.Texture.fromImage(RESOURCES['s_game_resume_nor_png']);
-  this.pressResumeTexture = Tiny.Texture.fromImage(RESOURCES['s_game_resume_pressed_png']);
+  this.pauseTexture = Tiny.Texture.fromImage(RESOURCES[ 's_game_pause_nor_png' ]);
+  this.pressPauseTexture = Tiny.Texture.fromImage(RESOURCES[ 's_game_pause_pressed_png' ]);
+  this.resumeTexture = Tiny.Texture.fromImage(RESOURCES[ 's_game_resume_nor_png' ]);
+  this.pressResumeTexture = Tiny.Texture.fromImage(RESOURCES[ 's_game_resume_pressed_png' ]);
 
   this._pause = false;
 
