@@ -140,7 +140,7 @@ Hero.prototype.attacking = function (parent) {
   }
   // 清理子弹
   parent._container.children.forEach(function (c) {
-    if (!(c instanceof Enemy)) {
+    if (!(c instanceof Enemy) && !(c instanceof Pickup)) {
       if (self.cartridges.indexOf(c) === -1) {
         console.log(c);
         parent._container.removeChild(c);
